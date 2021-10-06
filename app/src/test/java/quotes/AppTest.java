@@ -23,7 +23,7 @@ class AppTest {
     void testReader() {
         try {
             String quote = "Quotes{author='Charles Dickens', likes='497 likes', text='Ask no questions, and you'll be told no lies.'}";
-            Path path = Paths.get("app/src/main/resources/recentquotes.json");
+            String path = "app/src/main/resources/recentquotes.json";
             ArrayList<Quotes> quotes = App.readerFunction(path);
 
             assertEquals(quote, quotes.get(1).toString());
@@ -32,4 +32,9 @@ class AppTest {
         }
     }
 
+    @Test void testApiReader() {
+        String urlApi = "http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en";
+        String testQuote =  App.dataApi(urlApi);
+        assertTrue(testQuote != null);
+    }
 }
